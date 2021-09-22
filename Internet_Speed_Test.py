@@ -10,6 +10,8 @@ try:
     print("-------------YOUR INTERNET SPEED TEST RESULT-----------------")
     print(f"DOWNLOAD RESULT :{download_result / 1024 / 1024:.2f} MB PER SECOND ")
     print(f"UPLOAD RESUTL :{upload_result /1024 / 1024:.2f}MB PER SECOND")
+    print("-----------You can get a png result from this Link-----------")
+    print(test.results.share())
     i = input("Press any key to exit")
 except:
     print("Sorry Sir I am not able to check your internet speed. As because there is no Internet or it is unstable.")

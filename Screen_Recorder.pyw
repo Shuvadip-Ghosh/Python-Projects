@@ -9,7 +9,7 @@ width = GetSystemMetrics(0)
 height = GetSystemMetrics(1)
 
 tame_stab = datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')
-file_name = f'{tame_stab}.mp4'
+file_name = f'C:\\Users\\Shuvadip Ghosh\\Pictures\\Screenrecord\\{tame_stab}.mp4'
 fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
 capture_video = cv2.VideoWriter(file_name, fourcc, 20.0, (width, height))
 
