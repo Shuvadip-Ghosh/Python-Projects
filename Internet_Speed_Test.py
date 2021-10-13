@@ -13,5 +13,6 @@ try:
     print("-----------You can get a png result from this Link-----------")
     print(test.results.share())
     i = input("Press any key to exit")
-except:
+except Exception as e:
     print("Sorry Sir I am not able to check your internet speed. As because there is no Internet or it is unstable.")
+    print(e)

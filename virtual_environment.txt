@@ -1,0 +1,11 @@
+how to setup virtual environment in python
+Linux:
+>> pip3 install virtualenv 
+>> virtualenv <name of environment>
+>> source <name of environment>/bin/activate
+>> deactivate
+Windows:
+>> pip install virtualenv
+>> virtualenv <name of environment>
+>> <name of environment>\Scripts\activate.bat
+>> deactivate
