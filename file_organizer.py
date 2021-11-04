@@ -1,5 +1,4 @@
-import os 
-
+import os
 
 videos_exts = ['3g2','3gp','avi','flv','h264','m4v','mkv','mov','mp4','mpg','mpeg','rm','swf','vob','wmv']
 document_exts = ['txt','doc','ord','docx','odt ','rtf','pdf','ods','xlr','xls','xlsx','key','odp','pps','ppt','pptx']
