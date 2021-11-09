@@ -30,7 +30,7 @@ SpeedTest     (pip install speedtest-cli)
 *********
 Keylogger
 *********
-Please dont misuse this program.
-I will not be responsible for any destructive outcomes of this program. 
+Please dont misuse this program.\n
+I will not be responsible for any destructive outcomes of this program. \n
 Other modules are built-in-module
 pyinput       (pip install pynput)
