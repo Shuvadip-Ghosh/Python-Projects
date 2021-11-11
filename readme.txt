@@ -34,3 +34,8 @@ Please dont misuse this program.
 I will not be responsible for any destructive outcomes of this program. 
 Other modules are built-in-module
 pyinput       (pip install pynput)
+
+# By the way I have QuickHeal Antivirus Installed In my system which is 
+unable to detect the Keylogger But the in built windows defender is ableto detect it.
+
+
