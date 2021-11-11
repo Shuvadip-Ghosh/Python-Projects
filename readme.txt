@@ -12,7 +12,7 @@ This Project Is for windows as it uses the pywin32 package
 Or You can specify your Screen resolution in the lines 25 and 26 
 and  delete the line no 5 and it will be wirking fine.
 Other modules are built-in-module 
-Opencv-python (pip install opencv-python)
+Opencv-python (pip install opencv-contrib-python)
 Numpy         (pip install numpy)
 Pillow        (pip install pillow)
 pywin32       (pip install pywin32)

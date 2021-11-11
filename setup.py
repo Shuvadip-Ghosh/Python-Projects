@@ -1,6 +1,6 @@
 import os
 
-os.system("pip install opencv-python")#screen recorder
+os.system("pip install opencv-contrib-python")#screen recorder
 os.system("pip install numpy")#screen recoder
 os.system("pip install pillow")#screen recorder
 os.system("pip install pywin32")#screen recorder

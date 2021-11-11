@@ -8,7 +8,7 @@ import cv2
 import numpy as np
 from PIL import ImageGrab
 import os
-tame_stab = datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')
+tame_stab = datetime.datetime.now().strftime('%Y-%m-%d%H-%M-%S')
 file_name = f'{tame_stab}'
 
 def send_notification(message):
@@ -26,7 +26,7 @@ def screen_recorder():
     height = GetSystemMetrics(1)
 
     fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
-    capture_video = cv2.VideoWriter(file_name+".mp4", fourcc, 20.0, (width, height))
+    capture_video = cv2.VideoWriter(file_name+".mp4", fourcc, 14.5, (width, height))
 
     while True:
         img = ImageGrab.grab(bbox=(0, 0, width, height))
@@ -88,6 +88,4 @@ if __name__ == "__main__":
 
     send_notification("Your video is ready\n enjoy!!!!!!")
     print("done")
-
-
-
+ 
