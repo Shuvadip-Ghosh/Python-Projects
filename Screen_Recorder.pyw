@@ -6,8 +6,9 @@ from plyer import notification
 from win32api import GetSystemMetrics
 import cv2
 import numpy as np
-from PIL import ImageGrab
+from PIL import ImageGrab, Image,ImageTk
 import os
+from tkinter import Tk, Label,LabelFrame
 tame_stab = datetime.datetime.now().strftime('%Y-%m-%d%H-%M-%S')
 file_name = f'{tame_stab}'
 
@@ -24,7 +25,14 @@ def send_notification(message):
 def screen_recorder():
     width = GetSystemMetrics(0)
     height = GetSystemMetrics(1)
-
+    root = Tk()
+    root.geometry("600x300")
+    root.configure(bg="black")
+    f1 = LabelFrame(root,bg = "black")
+    f1.pack()
+    L1= Label(f1,bg = "black")
+    L1.pack()
+    
     fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
     capture_video = cv2.VideoWriter(file_name+".mp4", fourcc, 14.5, (width, height))
 
@@ -32,8 +40,13 @@ def screen_recorder():
         img = ImageGrab.grab(bbox=(0, 0, width, height))
         img_np = np.array(img)
         img_final = cv2.cvtColor(img_np, cv2.COLOR_BGR2RGB)
-        cv2.imshow('My Screen Recorder', img_final)
+        img_final_bc = img_final
+        #cv2.imshow('My Screen Recorder', img_final)
         capture_video.write(img_final)
+        img_resized = cv2.resize(img_final_bc, (500,300))
+        imgTk=ImageTk.PhotoImage(image=Image.fromarray(img_resized))
+        L1['image'] = imgTk
+        root.update()
         if cv2.waitKey(10) == ord('q'):
             break
 def voice_recorder():
