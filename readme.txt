@@ -1,6 +1,9 @@
 This is a Repositiory where you can find small projects 
 After cloing the repositiory you can run the setup.py file to install all the packages needed 
 
+Disclaimer:
+The owner of this repositiory will not be responsible for any destructive outcomes or any unlawful or illegal use of these program. 
+
 Except for PyAudio you have to install it your self because PyAudio has some problem With python Version 
 And Other things So you need to iNstall it manually
 
@@ -38,4 +41,26 @@ pyinput       (pip install pynput)
 # By the way I have QuickHeal Antivirus Installed In my system which is 
 unable to detect the Keylogger But the in built windows defender is ableto detect it.
 
+***************
+wifi_pass_win10
+***************
+Just run the Program 
+
+python wifi_pass_win10.py
+or
+python3 wifi_pass_win10.py
+
+and all the saved wifi passwors will be displayer on the screen.
+
+***********************
+chrome_password_stealer
+***********************
+Modules required
+pycryptodome (pip install pycryptodome)
+pywin32      (pip install pywin32)
+
+*****************
+exif_data_img_ext
+*****************
+** The work for this file is not yet finished
 
