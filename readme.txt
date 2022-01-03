@@ -59,8 +59,3 @@ Modules required
 pycryptodome (pip install pycryptodome)
 pywin32      (pip install pywin32)
 
-*****************
-exif_data_img_ext
-*****************
-** The work for this file is not yet finished
-
