@@ -59,3 +59,6 @@ Modules required
 pycryptodome (pip install pycryptodome)
 pywin32      (pip install pywin32)
 
+browser
+pip install pyqt5
+pip install PyQtWebEngine
