@@ -21,7 +21,6 @@ Pillow        (pip install pillow)
 pywin32       (pip install pywin32)
 Wave          (pip install Wave)
 MoviePy       (pip install moviepy)
-Plyer         (pip install plyer)
 Pyaudio       (pip install PyAudio) 
 This command might or might not work according to your python version
 ******************

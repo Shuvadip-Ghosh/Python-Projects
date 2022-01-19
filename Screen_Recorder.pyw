@@ -26,6 +26,7 @@ class ScreenRecorder():
         self.recorder_running = False
         self.running = True
         self.camera = False
+        self.camera_position = "down-right"
         gui_thread.start()
 
     
@@ -36,37 +37,34 @@ class ScreenRecorder():
             self.recorder_running = True
             self.screen.start()
             self.voice.start()
+            self.message_label.configure(text="Video Recording is on.")
         elif op == 1 and self.recorder_running:
-            print("Already running")
+            self.message_label.configure(text="Video Recording is on.")
         elif op ==0 and self.recorder_running:
             self.recorder_running = False
+            self.message_label.configure(text="Video Recording off.....")
         elif op ==0 and not self.recorder_running:
-            screen_width = self.win.winfo_width()
-            screen_height = self.win.winfo_height()
-
-            #Print the screen size
-            print("Screen width:", screen_width)
-            print("Screen height:", screen_height)
+            self.message_label.configure(text="Video Recording is already off.")
         elif op ==2 and not self.camera:
             self.camera = True
-            self.rec_cam.configure(text="Recording Camera")
+            self.rec_cam.configure(text="Camera recording on")
         elif op ==2 and self.camera:
             self.camera=False
-            self.rec_cam.configure(text="Record Camera")
+            self.rec_cam.configure(text="Camera recording off")
 
 
                 
     def gui_loop(self):
         self.wid = 1044
-        self.hei = 510
+        self.hei = 520
         self.win = tkinter.Tk()
         self.win.title("Screen Recorder")
         self.win.geometry(f"{self.wid}x{self.hei}")
         self.win.minsize(self.wid,self.hei)
         self.win.maxsize(self.wid,self.hei)
-        # self.win.configure(bg="black")
+        self.win.configure(bg="black")
 
-        self.image_frame = tkinter.Frame(self.win,bg="black")
+        self.image_frame = tkinter.Frame(self.win,bg="#3B3938")
         self.image_frame.pack(side="top",fill=X)
         
         self.button_frame = tkinter.Frame(self.win,bg="black",highlightbackground="#3B3938", highlightthickness=2)
@@ -78,10 +76,10 @@ class ScreenRecorder():
         self.button_frame_left = tkinter.Frame(self.button_frame,bg="black",highlightbackground="#3B3938", highlightthickness=2)
         self.button_frame_left.pack(side="left",anchor="nw")
 
-        self.image_label = tkinter.Label(self.image_frame,bg="black")
+        self.image_label = tkinter.Label(self.image_frame,bg="#3B3938")
         self.image_label.pack(side="top")
         
-        self.image_label_bc = tkinter.Label(self.image_frame,height=24,bg="#3B3938",width=93)
+        self.image_label_bc = tkinter.Label(self.image_frame,height=24,bg="black",width=93)
         self.image_label_bc.pack(side="top")
         
         self.start_rec = tkinter.Button(self.button_frame_right,bg="#3B3938",command=lambda: self.start_or_stop(1),text="Start Recording")
@@ -104,21 +102,21 @@ class ScreenRecorder():
 
         self.message_label = tkinter.Label(self.win,fg="white",bg="black",width=40,text="No New Message")
         self.message_label.pack(side="right")
-
+        
         self.gui_done=True
         self.win.mainloop()
         
     def screen_recorder(self):
         tame_stab = datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')
-        # self.file_name = f'Screen Recording {tame_stab}' 
-        self.file_name = f'Screen Recording' 
+        self.file_name = f'Screen Recording {tame_stab}' 
+        # self.file_name = f'Screen Recording' 
         width = GetSystemMetrics(0)
         height = GetSystemMetrics(1)
        
         fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
         capture_video = cv2.VideoWriter(self.file_name+".mp4", fourcc, 14.5, (width, height))
         self.image_label_bc.destroy()
-        self.image_label.configure(bg="#3B3938")
+        self.image_label.configure(bg="black")
         while True:
             if self.recorder_running == False:
                 break
@@ -128,8 +126,18 @@ class ScreenRecorder():
                 img_np = np.array(img)
                 img_final = cv2.cvtColor(img_np, cv2.COLOR_BGR2RGB)
                 _, frame = self.webcam.read()
-                fr_height, fr_width, _ = frame.shape
-                img_final[0:fr_height, 0: fr_width, :] = frame[0: fr_height, 0: fr_width, :]
+                frame = cv2.resize(frame,(213,160)) # the ratio width:height :: 4:3
+                fr_height, fr_width, _= frame.shape
+                vi_height = height-fr_height
+                vi_width = width-fr_width
+                if "top-left" in self.camera_position:
+                    img_final[0:fr_height, 0:fr_width, :] = frame[0:fr_height,0:fr_width,:]
+                elif "top-right" in self.camera_position:
+                    img_final[0:fr_height, vi_width:width, :] = frame[0:fr_height,0:fr_width,:]
+                elif "down-left" in self.camera_position:
+                    img_final[vi_height:height, 0:fr_width, :] = frame[0:fr_height,0:fr_width,:]
+                elif "down-right" in self.camera_position:
+                    img_final[vi_height:height, vi_width:width, :] = frame[0:fr_height, 0:fr_width, :]
             else:
                 img = ImageGrab.grab(bbox=(0, 0, width, height))
                 img_np = np.array(img)
@@ -140,7 +148,12 @@ class ScreenRecorder():
             img_resized = cv2.resize(img_final_bc, (650,387))
             img_resized = cv2.cvtColor(img_resized,cv2.COLOR_BGR2RGB)
             imgTk=ImageTk.PhotoImage(image=Image.fromarray(img_resized))
-            self.image_label['image'] = imgTk    
+            self.image_label['image'] = imgTk
+        self.image_label.configure(image='',bg="#3B3938")
+        self.image_label_bc = tkinter.Label(self.image_frame,height=24,bg="black",width=93)
+        self.image_label_bc.pack(side="top")
+        # print(f"{fr_width} {fr_height}")
+        print("done Screen")
 
     def voice_recorder(self):
         audio = pyaudio.PyAudio()
@@ -162,12 +175,12 @@ class ScreenRecorder():
         sound_file.setframerate(44100)
         sound_file.writeframes(b''.join(frames))
         sound_file.close()
-        
+        print("voice")
         self.save_vid = threading.Thread(target=self.save)
         self.save_vid.start()
         
     def save(self):
-        self.save_vid_progress.start(15)
+        self.save_vid_progress.start(20)
         self.message_label.configure(text="Saving Video")
         try:
             videoclip = VideoFileClip(f"{self.file_name}.mp4")
@@ -184,7 +197,8 @@ class ScreenRecorder():
         except:
             self.message_label.configure(text="Error Saving Video")
         self.save_vid_progress.stop()
-
+        print("done Saving")
+        
         
 
 
