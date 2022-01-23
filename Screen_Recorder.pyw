@@ -118,13 +118,14 @@ class ScreenRecorder():
 
     def screen_recorder(self):
         tame_stab = datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')
-        self.file_name = f'Screen Recording {tame_stab}'
-        # self.file_name = f'Screen Recording'
+        # self.file_name = f'Screen Recording {tame_stab}'
+        self.file_name = f'Screen Recording'
         width = GetSystemMetrics(0)
         height = GetSystemMetrics(1)
 
         fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
-        capture_video = cv2.VideoWriter(self.file_name+".mp4", fourcc, 14.5, (width, height))
+        capture_video = cv2.VideoWriter(self.file_name+".mp4", fourcc, 19.75, (width, height))
+        # capture_video = cv2.VideoWriter(self.file_name+".mp4", fourcc, 14.5, (width, height))
         self.image_label_bc.destroy()
         self.image_label.configure(bg="black")
         while True:
@@ -160,7 +161,7 @@ class ScreenRecorder():
             imgTk=ImageTk.PhotoImage(image=Image.fromarray(img_resized))
             self.image_label['image'] = imgTk
 
-
+        capture_video.release()
         self.image_label.configure(image='',bg="#3B3938")
         self.image_label_bc = tkinter.Label(self.image_frame,height=24,bg="black",width=93)
         self.image_label_bc.pack(side="top")
@@ -168,22 +169,22 @@ class ScreenRecorder():
         print("done Screen")
 
     def voice_recorder(self):
-        audio = pyaudio.PyAudio()
-        stream = audio.open(format= pyaudio.paInt16,channels = 1,rate = 44100,
+        self.audio = pyaudio.PyAudio()
+        self.stream = self.audio.open(format= pyaudio.paInt16,channels = 1,rate = 44100,
                             input=True,frames_per_buffer = 1024)
         frames = []
         while True:
-            data = stream.read(1024)
+            data = self.stream.read(1024)
             frames.append(data)
             if not self.screen.is_alive():
                 break
-        stream.stop_stream()
-        stream.close()
-        audio.terminate()
+        self.stream.stop_stream()
+        self.stream.close()
+        self.audio.terminate()
 
         sound_file = wave.open(f"{self.file_name}.wav","wb")
         sound_file.setnchannels(1)
-        sound_file.setsampwidth(audio.get_sample_size(pyaudio.paInt16))
+        sound_file.setsampwidth(self.audio.get_sample_size(pyaudio.paInt16))
         sound_file.setframerate(44100)
         sound_file.writeframes(b''.join(frames))
         sound_file.close()
