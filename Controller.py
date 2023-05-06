@@ -5,6 +5,8 @@ import websocket
 import json
 import threading
 
+pydirectinput.PAUSE = 0
+
 class Controller:
     def __init__(self) -> None:
         s = list(serial.tools.list_ports.comports())
@@ -13,10 +15,9 @@ class Controller:
             inpstring = inpstring + str(index) + " "+ str(e.description) + "\n"
         inp = int(input(inpstring+">>> "))
         self.arduino = serial.Serial(s[inp].name,115200,timeout=.1)
-        pydirectinput.PAUSE = 0
         self.keysDown = {} 
 
-        appconn = threading.Thread(target=self.connect)
+        appconn = threading.Thread(target=self.connect, daemon=True)
         appconn.start()
 
         while True:
@@ -26,40 +27,11 @@ class Controller:
                 data = data.replace('\n',"")
                 data = data.replace('\r',"")
                 if data == 's' or data == 'w':
-                    print(data)
+                    # print(data)
                     self.handlekeys(data)
             except UnicodeDecodeError as e:
                 print(rawdata)
 
-
-    def on_message(self, message):
-        values = json.loads(message)['values']
-        y = int(values[1])
-        if y>2:
-            self.keyDown('d')   #add up key to keyDown (argument)
-            self.keyUp('a')
-        elif y<-2:
-            self.keyDown('a')   #add up key to keyDown (argument)
-            self.keyUp('d')
-
-    def on_error(self, error):
-        print("error occurred")
-        print(error)
-
-    def on_close(self, close_code, reason):
-        print("connection close")
-        print("close code : ", close_code)
-        print("reason : ", reason  )
-
-    def on_open(self):
-        print("connected")
-        
-    def connect(self):
-        url = "ws://10.0.0.2:8080/sensor/connect?type=android.sensor.accelerometer"
-        ws = websocket.WebSocketApp(url,on_open=self.on_open,on_message=self.on_message,on_error=self.on_error,on_close=self.on_close)
-        ws.run_forever()
-        
-    
     def keyDown(self,key):               #what to do if key pressed. takes value from handleJoyStickAsArrowKeys
         self.keysDown[key] = True        #adds key to KeysDown list
         pydirectinput.keyDown(key)  #runs pydirectinput using key from (argument)     #remove '#' from print to test data stream
@@ -80,4 +52,43 @@ class Controller:
         else:               #1 is neutral on joystick
             self.keyUp('up')
             self.keyUp('down') 
-  
+
+
+
+
+    def on_message(self,ws, message):
+        values = json.loads(message)['values']
+        y = int(values[1])
+        if y>=2:
+            print("d")
+            self.keyDown('d')   #add up key to keyDown (argument)
+            self.keyUp('a')
+        elif y<=-2:
+            print("a")
+            self.keyDown('a')   #add up key to keyDown (argument)
+            self.keyUp('d')
+        else:
+            self.keyUp('a')
+            self.keyUp('d')
+
+    def on_error(self,ws, error):
+        print("error occurred")
+        print(error)
+
+    def on_close(self,ws, close_code, reason):
+        print("connection close")
+        print("close code : ", close_code)
+        print("reason : ", reason  )
+
+    def on_open(self,ws):
+        print("connected")
+        
+    def connect(self):
+        url = "ws://10.0.0.2:8080/sensor/connect?type=android.sensor.accelerometer"
+        ws = websocket.WebSocketApp(url,on_open=self.on_open,on_message=self.on_message,on_error=self.on_error,on_close=self.on_close)
+        ws.run_forever()
+
+
+
+
+cont = Controller()

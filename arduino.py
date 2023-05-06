@@ -3,14 +3,14 @@ import pydirectinput
 import serial.tools.list_ports
 import time
 
-# s = list(serial.tools.list_ports.comports())
-# inpstring = ""
-# for index , e in enumerate(s):
-#     inpstring = inpstring + str(index) + " "+ str(e.description) + "\n"
+s = list(serial.tools.list_ports.comports())
+inpstring = ""
+for index , e in enumerate(s):
+    inpstring = inpstring + str(index) + " "+ str(e.description) + "\n"
 
-# inp = int(input(inpstring+">>> "))
+inp = int(input(inpstring+">>> "))
 
-# arduino = serial.Serial(s[inp].name,115200,timeout=.1)
+arduino = serial.Serial(s[inp].name,115200,timeout=.1)
 
 pydirectinput.PAUSE = 0
 
@@ -41,15 +41,13 @@ def handlekeys(x):      #note that the x and y directions are swapped due to the
         keyUp('down') 
 time.sleep(2)
 while True:
-    keyDown('a')   #add up key to keyDown (argument)
-    keyUp('a') 
-    # rawdata = arduino.readline()
-    # try:
-    #     data = str(rawdata.decode('utf-8'))
-    #     data = data.replace('\n',"")
-    #     data = data.replace('\r',"")
-    #     if data == 's' or data == 'w':
-    #         print(data)
-    #         handlekeys(data)
-    # except UnicodeDecodeError as e:
-    #     print(rawdata)
+    rawdata = arduino.readline()
+    try:
+        data = str(rawdata.decode('utf-8'))
+        data = data.replace('\n',"")
+        data = data.replace('\r',"")
+        if data == 's' or data == 'w':
+            print(data)
+            handlekeys(data)
+    except UnicodeDecodeError as e:
+        print(rawdata)
