@@ -13,3 +13,4 @@ os.system("pip install pynput")#Python Keylogger
 os.system("pip install pycryptodome")# chrome password stealer
 os.system("pip install pyfiglet")#exif data extracter
 os.system("pip install pyautogui")#task manager
+os.system("pip install pytube ")#youtube video downloader
