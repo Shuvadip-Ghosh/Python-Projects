@@ -14,3 +14,4 @@ os.system("pip install pycryptodome")# chrome password stealer
 os.system("pip install pyfiglet")#exif data extracter
 os.system("pip install pyautogui")#task manager
 os.system("pip install pytube ")#youtube video downloader
+os.system("pip install windows-curses")#only for windows as it is built into linux and mac here it is used in the typing speed file.
