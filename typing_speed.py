@@ -1,9 +1,8 @@
 import curses
-from curses import wrapper
 import time
 import random
 
-a = [
+A = [
     "A cat and a dog chased a ball in the park.",
     "An apple a day keeps the doctor away.",
     "I have a black hat and a blue bag.",
@@ -15,7 +14,7 @@ a = [
     "The artist drew a beautiful landscape.",
     "The baby laughed and clapped its hands."
 ]
-b = [
+B = [
     "The big brown bear roamed in the forest.",
     "A blue bird flew over the river.",
     "She bought a basket full of fruits.",
@@ -27,7 +26,7 @@ b = [
     "The bookshelf in the corner was filled with books.",
     "He was busy with his business trip."
 ]
-c = [
+C = [
     "The clever cat caught a fish.",
     "She wore a colorful coat in the cold.",
     "A cute little puppy played in the park.",
@@ -39,7 +38,7 @@ c = [
     "The chef cooked delicious cookies.",
     "The clock struck twelve as the party began."
 ]
-d = [
+D = [
     "The dog barked loudly at the mailman.",
     "He danced with delight at the party.",
     "A delicious dinner was served on the table.",
@@ -51,7 +50,7 @@ d = [
     "They decided to visit the nearby zoo.",
     "The door creaked as it opened slowly."
 ]
-e = [
+E = [
     "The elephant is the largest land animal.",
     "She earned a gold medal for her performance.",
     "We enjoyed the evening by the lake.",
@@ -63,7 +62,7 @@ e = [
     "She explained the concept in a simple way.",
     "The event ended with a grand celebration."
 ]
-f = [
+F= [
     "I found a lost kitten near my house.",
     "The firefighters rushed to the burning building.",
     "She played the flute at the school concert.",
@@ -75,7 +74,7 @@ f = [
     "I forgot to bring my umbrella in the rain.",
     "She finished her work before the deadline."
 ]
-g = [
+G= [
     "The green grass grew in the garden.",
     "He gave a great speech at the conference.",
     "The grapes were sweet and juicy.",
@@ -87,7 +86,7 @@ g = [
     "The giggling children played in the park.",
     "The golden sunset painted the sky."
 ]
-h = [
+H= [
     "He had a habit of humming while working.",
     "I held her hand as we walked together.",
     "The horse galloped across the open field.",
@@ -99,7 +98,7 @@ h = [
     "The hotel had a beautiful view of the ocean.",
     "They happily danced at the wedding."
 ]
-i = [
+I= [
     "I am excited to visit the new amusement park.",
     "She is studying information technology.",
     "The ice cream shop offered a variety of flavors.",
@@ -111,7 +110,7 @@ i = [
     "The illustrator drew colorful illustrations for the book.",
     "I ignored the noise and focused on my work."
 ]
-j = [
+J= [
     "Jack jumped over the candlestick.",
     "The jellyfish gracefully swam in the ocean.",
     "He joined a jazz band as a drummer.",
@@ -123,7 +122,7 @@ j = [
     "The jury carefully considered the evidence.",
     "I jogged around the park for exercise."
 ]
-k = [
+K= [
     "The kind king ruled the kingdom with compassion.",
     "She kicked the ball with all her strength.",
     "The kids played happily in the playground.",
@@ -135,7 +134,7 @@ k = [
     "The kangaroo hopped across the vast desert.",
     "The kite soared high in the sky on a windy day."
 ]
-l = [
+L= [
     "The little girl picked up the colorful flowers.",
     "He looked at the lovely landscape painting.",
     "The lion roared loudly in the jungle.",
@@ -147,7 +146,7 @@ l = [
     "He learned to play the guitar with dedication.",
     "The leaves on the trees turned yellow in autumn."
 ]
-m = [
+M= [
     "The magical magician entertained the audience.",
     "The moon shines brightly in the night sky.",
     "He made a mistake but quickly corrected it.",
@@ -159,7 +158,7 @@ m = [
     "The mechanic fixed the broken car.",
     "The map showed the way to the treasure."
 ]
-n = [
+N= [
     "The naughty child played pranks on his siblings.",
     "She needs to finish her homework before dinner.",
     "The nurse took care of the sick patients.",
@@ -171,7 +170,7 @@ n = [
     "The necklace was a gift from her grandmother.",
     "The novel kept me engaged till the last page."
 ]
-o = [
+O= [
     "The orange is a juicy and delicious fruit.",
     "I observed the behavior of the wild animals.",
     "She opened the door to let in fresh air.",
@@ -183,7 +182,7 @@ o = [
     "The old man sat on the park bench.",
     "The office was buzzing with activity."
 ]
-p = [
+P= [
     "The playful puppy chased its tail.",
     "The parrot repeated the words I said.",
     "She painted a pretty picture of a flower.",
@@ -195,7 +194,7 @@ p = [
     "I packed my bag for the weekend trip.",
     "He pressed the button to turn on the computer."
 ]
-q = [
+Q= [
     "The quiet library is a great place to study.",
     "She quickly solved the difficult math question.",
     "The queen wore a beautiful gown to the ball.",
@@ -207,7 +206,7 @@ q = [
     "The quilt kept her warm on a cold night.",
     "He quenched his thirst with a glass of water."
 ]
-r = [
+R= [
     "The rabbit hopped away into the woods.",
     "She read a thrilling novel by the author.",
     "I rode my bike to the park.",
@@ -219,7 +218,7 @@ r = [
     "The road led to a beautiful beach.",
     "I received a letter from my friend."
 ]
-s = [
+S= [
     "The sun set behind the mountains.",
     "She sang a sweet melody.",
     "The snake slithered silently through the grass.",
@@ -231,7 +230,7 @@ s = [
     "I swam in the cool and refreshing water.",
     "The scientist conducted experiments in the lab."
 ]
-t = [
+T= [
     "The tiger is a majestic and powerful animal.",
     "She typed a long document on her laptop.",
     "I tasted the delicious cake at the bakery.",
@@ -243,7 +242,7 @@ t = [
     "I took a walk in the park in the morning.",
     "The traffic on the road was heavy during rush hour."
 ]
-u = [
+U= [
     "I used a blue pen to write the letter.",
     "The umbrella protected me from the rain.",
     "She used her skills to create a masterpiece.",
@@ -255,7 +254,7 @@ u = [
     "She unlocked the door with a key.",
     "The universe is vast and full of mysteries."
 ]
-v = [
+V= [
     "The violinist played a beautiful melody.",
     "The vibrant colors brightened up the room.",
     "I visited the famous art museum.",
@@ -267,7 +266,7 @@ v = [
     "I value the time spent with family.",
     "The vegetables were fresh and healthy."
 ]
-w = [
+W= [
     "The white rabbit hopped quickly.",
     "She wore a warm winter coat.",
     "I watched a funny video online.",
@@ -279,7 +278,7 @@ w = [
     "The weather was warm and sunny.",
     "The whale is a massive sea creature."
 ]
-x = [
+X= [
     "The xylophone made a pleasant sound.",
     "She had to fix a broken axle.",
     "I received an expensive gift.",
@@ -291,7 +290,7 @@ x = [
     "The extra effort paid off in the end.",
     "The exercise routine helped improve my health."
 ]
-y = [
+Y= [
     "The yellow sun rose in the sky.",
     "She wore a pretty yellow dress.",
     "I yelled for help when I was stuck.",
@@ -303,7 +302,7 @@ y = [
     "The yogurt was creamy and delicious.",
     "I enjoyed the view of the mountains."
 ]
-z = [
+Z= [
     "The zebra has black and white stripes.",
     "She zoomed in on the tiny details.",
     "I zipped up my jacket to stay warm.",
@@ -316,13 +315,21 @@ z = [
     "I snoozed for a while in the afternoon."
 ]
 
-
+uc=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 
 def start_screen(stdscr):
 	stdscr.clear()
-	stdscr.addstr("Welcome to the Speed Typing Test!",curses.A_BOLD)
-	stdscr.addstr("\nPress any key to begin!")
+	stdscr.addstr(0,0,"Welcome to the Speed Typing Test!",curses.A_BOLD)
+	stdscr.addstr(1,0,"Press Select a letter to begin!",curses.A_BOLD)
+    
+	r= int((curses.COLS/2)-(52))
+	curses.init_pair(3,curses.COLOR_BLACK,curses.COLOR_WHITE)
+	for x in uc:
+	    stdscr.addstr(2,r,f" {x} ",curses.color_pair(3))
+	    r+=3
+	    stdscr.addstr(2,r," ")
+	    r+=1
 	stdscr.refresh()
 	stdscr.getkey()
 
@@ -396,6 +403,22 @@ def main(stdscr):
 			stdscr.addstr(2,0,"An Error occurred!\nPress Esc to exit or \nPress any key to continue...")
 		key = stdscr.getkey()
 		if ord(key)==27:
-			break
-		
-wrapper(main)
+		    curses.endwin()
+		    break
+
+def test(stdscr): 
+    stdscr.clear()
+    stdscr.addstr(0,0,"Welcome to the Speed Typing Test!",curses.A_BOLD)
+    stdscr.addstr(1,0,"Press Select a letter to begin!",curses.A_BOLD)
+    s=r= int((curses.COLS/2)-(52))
+    curses.init_pair(3,curses.COLOR_BLACK,curses.COLOR_WHITE)
+    for x in uc:
+	    stdscr.addstr(2,r,f" {x} ",curses.color_pair(3))
+	    r+=3
+	    stdscr.addstr(2,r," ")
+	    r+=1
+    stdscr.addstr(3,s-1,"")
+    stdscr.refresh()
+    stdscr.getkey()
+
+curses.wrapper(test)
