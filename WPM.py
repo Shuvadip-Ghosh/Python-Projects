@@ -314,22 +314,19 @@ Z= [
     "The zealous athlete trained hard for the competition.",
     "I snoozed for a while in the afternoon."
 ]
-
 uc=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
-
 def start_screen(stdscr):
+	r=s=int((curses.COLS/2)-(52))
 	stdscr.clear()
-	stdscr.addstr(0,0,"Welcome to the Speed Typing Test!",curses.A_BOLD)
-	stdscr.addstr(1,0,"Press Select a letter to begin!",curses.A_BOLD)
-    
-	r= int((curses.COLS/2)-(52))
-	curses.init_pair(3,curses.COLOR_BLACK,curses.COLOR_WHITE)
+	stdscr.addstr(s-2,r,"Welcome To Speed Typing Test!",curses.A_BOLD)
+	stdscr.addstr(s-1,r,"PLease select a letter to begin!",curses.A_BOLD)
 	for x in uc:
-	    stdscr.addstr(2,r,f" {x} ",curses.color_pair(3))
-	    r+=3
-	    stdscr.addstr(2,r," ")
-	    r+=1
+		stdscr.addstr(s+2,r,f" {x} ",curses.A_REVERSE)
+		r+=3
+		stdscr.addstr(s+2,r,f" ")
+		r+=1
+	stdscr.addstr(s+2,s-1,"")
 	stdscr.refresh()
 	stdscr.getkey()
 
@@ -345,21 +342,11 @@ def display_text(stdscr, target, current, wpm=0):
 
 		stdscr.addstr(0, i, char, color)
 
-def load_text():
-    lines = ["The quick brown fox jumps over the lazy dog.",
-    "Pack my box with five dozen liquor jugs.",
-    "How quickly daft jumping zebras vex.",
-    "Jinxed wizards pluck ivy from the big quilt.",
-    "The five boxing wizards jump quickly.",
-    "Bright vixens jump; dozy fowl quack.",
-    "We promptly judged antique ivory buckles for the next prize.",
-    "Crazy Fredrick bought many very exquisite opal jewels.",
-    "The job requires extra pluck and zeal from every young wage earner."]
+def load_text(letter):
+    return random.choice(eval(letter)).strip()
 
-    return random.choice(lines).strip()
-
-def wpm_test(stdscr):
-	target_text = load_text()
+def wpm_test(stdscr,letter):
+	target_text = load_text(letter)
 	current_text = []
 	wpm = 0
 	start_time = time.time()
@@ -383,6 +370,7 @@ def wpm_test(stdscr):
 			continue
 
 		if ord(key) == 27:
+			curses.endwin()
 			break
 
 		if key in ("KEY_BACKSPACE", '\b', "\x7f"):
@@ -397,7 +385,7 @@ def main(stdscr):
 	start_screen(stdscr)
 	while True:
 		try:
-			wpm_test(stdscr)
+			wpm_test(stdscr,"A")
 			stdscr.addstr(2,0,"You completed the text!\nPress Esc to exit or \nPress any key to continue...")
 		except:
 			stdscr.addstr(2,0,"An Error occurred!\nPress Esc to exit or \nPress any key to continue...")
@@ -406,19 +394,4 @@ def main(stdscr):
 		    curses.endwin()
 		    break
 
-def test(stdscr): 
-    stdscr.clear()
-    stdscr.addstr(0,0,"Welcome to the Speed Typing Test!",curses.A_BOLD)
-    stdscr.addstr(1,0,"Press Select a letter to begin!",curses.A_BOLD)
-    s=r= int((curses.COLS/2)-(52))
-    curses.init_pair(3,curses.COLOR_BLACK,curses.COLOR_WHITE)
-    for x in uc:
-	    stdscr.addstr(2,r,f" {x} ",curses.color_pair(3))
-	    r+=3
-	    stdscr.addstr(2,r," ")
-	    r+=1
-    stdscr.addstr(3,s-1,"")
-    stdscr.refresh()
-    stdscr.getkey()
-
-curses.wrapper(test)
+curses.wrapper(main)
