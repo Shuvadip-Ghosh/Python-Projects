@@ -114,4 +114,5 @@ if __name__ == "__main__":
             else:
                 print("Oh ho it looks like no one of you have won")
                 print_box(positions["a"],positions["b"],positions["c"],positions["d"],positions["e"],positions["f"],positions["g"],positions["h"],positions["i"])
+    input("Press anything to exit...")
                 

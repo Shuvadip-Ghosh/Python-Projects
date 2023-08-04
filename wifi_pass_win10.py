@@ -28,3 +28,5 @@ if len(profile_names) != 0:
 
 for x in range(len(wifi_list)):
     print(wifi_list[x]) 
+
+input("Press anything to exit.....")
