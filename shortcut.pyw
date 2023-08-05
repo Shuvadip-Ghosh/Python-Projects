@@ -11,8 +11,6 @@ def check():
         pyautogui.press("volumeup")
     if pressed_keys.count("Key.ctrl_l") and pressed_keys.count("Key.shift") and pressed_keys.count("Key.down"):
         pyautogui.press("volumedown")
-    if pressed_keys.count("Key.ctrl_l") and pressed_keys.count("Key.shift") and pressed_keys.count("Key.down"):
-        pyautogui.press("volumedown")
     if pressed_keys.count("Key.print_screen"):
         time_stab = datetime.datetime.now().strftime('%d-%m-%Y %H-%M-%S')
         directory = f'C:\\Users\\{getpass.getuser()}\\Pictures\\Screenshot\\Screenshot-{time_stab}.png'
