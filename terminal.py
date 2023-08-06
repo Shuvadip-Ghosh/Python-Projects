@@ -4,7 +4,8 @@ import os
 import platform
 
 def run(command):
-	return subprocess.run(command.split(), shell=True, capture_output=True).stdout.decode()
+	result = str(subprocess.run(command.split(), shell=True, capture_output=True).stdout.decode())
+	return result.split("\n")
 
 def main(stdscr):
 	if platform.system() == 'Windows':
@@ -35,13 +36,16 @@ def main(stdscr):
 
 			elif key in ("KEY_BACKSPACE", '\b', "\x7f"):
 				command = command[0:len(command)-1:]
-				i=" "*6
-				stdscr.addstr(y,x,len(i))
+				stdscr.addstr(y,x," "*(len(command)+1))
 				stdscr.addstr(y,x,command)
 
 			elif ord(key) == 10:
 				prev_command.append(command)
+				
 				res = run(command)
+				for r in res:
+					y+=1
+					stdscr.addstr(y,0,r)
 				# stdscr.addstr("\n")
 				# y+=1
 				break
@@ -50,12 +54,6 @@ def main(stdscr):
 				stdscr.addstr(key)
 		y+=1
 		
-		
 
-
-		
-	# get pc name ,directory name,git status if any.
-	# get input then pass the input to the run(command) above
-	# then display the returned value.
-
+	# git status
 curses.wrapper(main)
