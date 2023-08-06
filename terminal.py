@@ -10,7 +10,6 @@ def main(stdscr):
 	if platform.system() == 'Windows':
 		stdscr.addstr(f"Microsoft Windows [Version {platform.version()}]\n(c) Microsoft Corporation. All rights reserved.\n\n")
 	prev_command = []
-	s= " "
 	d_com = []
 	y = 3
 	while True:
@@ -33,8 +32,11 @@ def main(stdscr):
 				stdscr.addstr("left")
 			elif key == "KEY_RIGHT":
 				stdscr.addstr("right")
+
 			elif key in ("KEY_BACKSPACE", '\b', "\x7f"):
 				command = command[0:len(command)-1:]
+				i=" "*6
+				stdscr.addstr(y,x,len(i))
 				stdscr.addstr(y,x,command)
 
 			elif ord(key) == 10:
@@ -46,8 +48,6 @@ def main(stdscr):
 			else:
 				command = command+key
 				stdscr.addstr(key)
-			# stdscr.addstr(y,x,command)
-			stdscr.refresh()
 		y+=1
 		
 		
